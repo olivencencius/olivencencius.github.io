@@ -189,7 +189,18 @@ button:hover,
 }
 .button.button-behance:hover,
 .button.button-behance:focus {
-  filter: brightness(90%);
+  /filter: brightness(90%);
+}
+
+/* Betsson */
+.button.button-betsson {
+  color: #ffffff;
+  background-color: #00a1af;
+}
+.button.button-betsson:hover,
+.button.button-betsson:focus {
+  /*filter: brightness(90%);*/
+  background-color: #f38b00;
 }
 
 /* Bluesky */
