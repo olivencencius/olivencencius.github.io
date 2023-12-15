@@ -189,7 +189,7 @@ button:hover,
 }
 .button.button-behance:hover,
 .button.button-behance:focus {
-  /filter: brightness(90%);
+  filter: brightness(90%);
 }
 
 /* Betsson */

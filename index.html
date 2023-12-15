@@ -103,6 +103,9 @@
         <!-- Default LittleLink -->
         <!-- <a class="button button-default" href="#" target="_blank" rel="noopener" role="button"><img class="icon" src="images/icons/littlelink.svg" alt="">LittleLink</a><br> -->
 
+        <a id="vcard" onclick="downloadVcard(this)" download="olivier_vencencius.vcf" class="button button-default" href="#" rel="noopener" role="button"><img class="icon" src="images/icons/generic-phone.svg" alt="">Add to Contacts</a><br>
+
+
         <!-- Amazon -->
         <!-- <a class="button button-amazon" href="#" target="_blank" rel="noopener" role="button"><img class="icon" src="images/icons/amazon.svg" alt="">Amazon Wishlist</a><br> -->
 
@@ -404,13 +407,15 @@
         <!-- <a class="button button-default" href="#" target="_blank" rel="noopener" role="button"><img class="icon" src="images/icons/generic-computer.svg" alt="">Homelab Setup</a><br> -->
 
         <!-- Betsson Email -->
-        <a class="button button-betsson" href="mailto:olivier.vencencius@betssongroup.com" target="_blank" rel="noopener" role="button"><img class="icon" src="images/icons/betssongroup.svg" alt="">Betsson Email Address</a><br>
-
+        <a class="button button-betsson" onclick="addToClipboard('olivier.vencencius@betssongroup.com')" href="#" rel="noopener" role="button"><img class="icon" src="images/icons/betssongroup.svg" alt="">olivier.vencencius@betsson...</a><br>
+        <a class="button button-betsson" href="mailto:olivier.vencencius@betssongroup.com" target="_blank" rel="noopener" role="button"><img class="icon" src="images/icons/betssongroup.svg" alt="">Send email - Betsson</a><br>
+        
         <!-- Generic Email Alt -->
         <!-- <a class="button button-default" href="mailto:" target="_blank" rel="noopener" role="button"><img class="icon" src="images/icons/generic-email-alt.svg" alt="">Private Email Address</a><br> -->
         
         <!-- Generic Email -->
-        <a class="button button-default" href="mailto:olivier.sports234@aleeas.com" target="_blank" rel="noopener" role="button"><img class="icon" src="images/icons/generic-email.svg" alt="">Private Email Address</a><br>
+        <a class="button button-default" onclick="addToClipboard('olivier.sports234@aleeas.com')" href="#" rel="noopener" role="button"><img class="icon" src="images/icons/generic-email.svg" alt="">olivier.sports234@aleeas.com</a><br>
+        <a class="button button-default" href="mailto:olivier.sports234@aleeas.com" target="_blank" rel="noopener" role="button"><img class="icon" src="images/icons/generic-email.svg" alt="">Send email - Private</a><br>
 
         <!-- Generic Homepage -->
         <!-- <a class="button button-default" href="#" target="_blank" rel="noopener" role="button"><img class="icon" src="images/icons/generic-homepage.svg" alt="">Visit Homepage</a><br> -->
@@ -455,5 +460,28 @@
   <!-- End Document
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 </body>
+
+<script>
+
+  const downloadVcard = (el) => {
+    const vcard = "BEGIN:VCARD\n" +
+      "VERSION:4.0\n" +
+      "FN:Olivier Vencencius (Betsson Group)\n" +
+      "EMAIL:olivier.vencencius@betssongroup.com\n" +
+      "EMAIL:olivier.sports234@aleeas.com\n" +
+      "TITLE: Principal Product Manager at Betsson, Product Consultant\n" +
+      "URL: https://me.olivier.business/\n" +
+      "END:VCARD";
+
+    const blob = new Blob([vcard], {
+      type: "text/vcard"
+    });
+    el.href = URL.createObjectURL(blob);
+  };
+
+  const addToClipboard = async(value) => {
+    await navigator.clipboard.writeText(value);
+  };
+</script>
 
 </html>
