@@ -42,16 +42,12 @@
 
             confirmBetButton.addEventListener('click', () => {
                 const options = {
-                    body: "Your preset bet now meets all the conditions. Would you like to place the bet? (France vs Belgium 0-1)",
-                    actions: [
-                        { action: 'yes', title: 'Yes' },
-                        { action: 'cancel', title: 'Cancel' }
-                    ]
+                    body: "Your preset bet now meets all the conditions. Would you like to place the bet? (France vs Belgium 0-1)"
                 };
                 const notification = new Notification("Bet Confirmation", options);
 
-                notification.onclick = event => {
-                    if (event.action === 'yes') {
+                notification.onclick = () => {
+                    if (confirm("Would you like to place the bet?")) {
                         alert("Bet placed!");
                     }
                 };
@@ -60,16 +56,13 @@
             oddsChangeNotificationButton.addEventListener('click', () => {
                 const options = {
                     body: "The odds for France vs Belgium just changed as France have made some substitutions. Odds for France to win are now 1.91. Would you like to place a bet?",
-                    data: { value: 10 },
-                    actions: [
-                        { action: 'place', title: 'Place Bet' },
-                        { action: 'ignore', title: 'Ignore' }
-                    ]
+                    data: { value: 10 }
                 };
                 const notification = new Notification("Odds Change", options);
 
-                notification.onclick = event => {
-                    if (event.action === 'place') {
+                notification.onclick = () => {
+                    const betAmount = prompt("Enter the bet amount:", "10");
+                    if (betAmount !== null) {
                         alert("Bet placed!");
                     }
                 };
