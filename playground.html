@@ -12,35 +12,6 @@
     <button id="oddsChangeNotificationButton">Odds Change Notification</button>
 
     <script>
-        // Service worker script
-        const serviceWorkerScript = `
-            self.addEventListener('notificationclick', function(event) {
-                const action = event.action;
-                if (action === 'yes') {
-                    clients.openWindow('/place-bet'); // Open a URL or perform any action
-                } else if (action === 'place') {
-                    clients.openWindow('/place-bet');
-                }
-                event.notification.close();
-            });
-        `;
-
-        // Register the service worker
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('service-worker.js').then(function(registration) {
-                console.log('Service Worker registered with scope:', registration.scope);
-            }).catch(function(error) {
-                console.log('Service Worker registration failed:', error);
-            });
-
-            navigator.serviceWorker.ready.then(function(registration) {
-                // Create the service worker file dynamically
-                const blob = new Blob([serviceWorkerScript], { type: 'text/javascript' });
-                const url = URL.createObjectURL(blob);
-                registration.update(url);
-            });
-        }
-
         document.addEventListener('DOMContentLoaded', () => {
             const plainNotificationButton = document.getElementById('plainNotificationButton');
             const confirmBetButton = document.getElementById('confirmBetButton');
@@ -48,10 +19,21 @@
 
             function showNotification(title, options) {
                 // Check if the browser supports notifications
-                if ("Notification" in window && navigator.serviceWorker) {
-                    navigator.serviceWorker.ready.then(function(registration) {
-                        registration.showNotification(title, options);
-                    });
+                if ("Notification" in window) {
+                    // Check if permission is already granted
+                    if (Notification.permission === "granted") {
+                        new Notification(title, options);
+                    } else if (Notification.permission !== "denied") {
+                        // Request permission to display notifications
+                        Notification.requestPermission().then(function (permission) {
+                            // If permission is granted
+                            if (permission === "granted") {
+                                new Notification(title, options);
+                            }
+                        });
+                    }
+                } else {
+                    console.log("This browser does not support notifications.");
                 }
             }
 
@@ -67,7 +49,13 @@
                         { action: 'cancel', title: 'Cancel' }
                     ]
                 };
-                showNotification("Bet Confirmation", options);
+                const notification = new Notification("Bet Confirmation", options);
+
+                notification.onclick = (event) => {
+                    if (event.action === 'yes') {
+                        alert("Bet placed!");
+                    }
+                };
             });
 
             oddsChangeNotificationButton.addEventListener('click', () => {
@@ -78,7 +66,13 @@
                         { action: 'ignore', title: 'Ignore' }
                     ]
                 };
-                showNotification("Odds Change", options);
+                const notification = new Notification("Odds Change", options);
+
+                notification.onclick = (event) => {
+                    if (event.action === 'place') {
+                        alert("Bet placed!");
+                    }
+                };
             });
         });
     </script>
