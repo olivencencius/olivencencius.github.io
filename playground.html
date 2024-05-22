@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Notification Example</title>
+</head>
+<body>
+    <h1>Web Notification Example</h1>
+    <p>Click the button to trigger a web notification after 3 seconds.</p>
+    <button id="notifyButton">Show Notification</button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const notifyButton = document.getElementById('notifyButton');
+
+            function showNotification() {
+                // Trigger notification after 3 seconds
+                setTimeout(() => {
+                    new Notification("Hello!", {
+                        body: "This is a dummy notification.",
+                        icon: "https://via.placeholder.com/150"
+                    });
+                }, 3000);
+            }
+
+            notifyButton.addEventListener('click', () => {
+                // Check if the browser supports notifications
+                if ("Notification" in window) {
+                    // Check if permission is already granted
+                    if (Notification.permission === "granted") {
+                        showNotification();
+                    } else if (Notification.permission !== "denied") {
+                        // Request permission to display notifications
+                        Notification.requestPermission().then(function (permission) {
+                            // If permission is granted
+                            if (permission === "granted") {
+                                showNotification();
+                            }
+                        });
+                    }
+                } else {
+                    console.log("This browser does not support notifications.");
+                }
+            });
+        });
+    </script>
+</body>
+</html>
