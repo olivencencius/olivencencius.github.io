@@ -3,45 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Web Notification Example</title>
+    <title>Notification Examples</title>
 </head>
 <body>
-    <h1>Web Notification Example</h1>
-    <p>Click the button to trigger a web notification after 3 seconds.</p>
-    <button id="notifyButton">Show Notification</button>
+    <h1>Notification Examples</h1>
+    <button id="plainNotificationButton">Plain Notification</button>
+    <button id="confirmBetButton">Confirm Bet Notification</button>
+    <button id="oddsChangeNotificationButton">Odds Change Notification</button>
 
     <script>
-        document.addEventListener('DOMContentLoaded', (event) => {
-            const notifyButton = document.getElementById('notifyButton');
+        document.addEventListener('DOMContentLoaded', () => {
+            const plainNotificationButton = document.getElementById('plainNotificationButton');
+            const confirmBetButton = document.getElementById('confirmBetButton');
+            const oddsChangeNotificationButton = document.getElementById('oddsChangeNotificationButton');
 
-            function showNotification() {
-                // Trigger notification after 3 seconds
-                setTimeout(() => {
-                    new Notification("Hello!", {
-                        body: "This is a dummy notification.",
-                        icon: "https://via.placeholder.com/150"
-                    });
-                }, 3000);
-            }
-
-            notifyButton.addEventListener('click', () => {
+            function showNotification(title, options) {
                 // Check if the browser supports notifications
                 if ("Notification" in window) {
                     // Check if permission is already granted
                     if (Notification.permission === "granted") {
-                        showNotification();
+                        new Notification(title, options);
                     } else if (Notification.permission !== "denied") {
                         // Request permission to display notifications
-                        Notification.requestPermission().then(function (permission) {
-                            // If permission is granted
+                        Notification.requestPermission().then(permission => {
                             if (permission === "granted") {
-                                showNotification();
+                                new Notification(title, options);
                             }
                         });
                     }
                 } else {
                     console.log("This browser does not support notifications.");
                 }
+            }
+
+            plainNotificationButton.addEventListener('click', () => {
+                showNotification("You just received a new freebet!");
+            });
+
+            confirmBetButton.addEventListener('click', () => {
+                const options = {
+                    body: "Your preset bet now meets all the conditions. Would you like to place the bet? (France vs Belgium 0-1)",
+                    actions: [
+                        { action: 'yes', title: 'Yes' },
+                        { action: 'cancel', title: 'Cancel' }
+                    ]
+                };
+                const notification = new Notification("Bet Confirmation", options);
+
+                notification.onclick = event => {
+                    if (event.action === 'yes') {
+                        alert("Bet placed!");
+                    }
+                };
+            });
+
+            oddsChangeNotificationButton.addEventListener('click', () => {
+                const options = {
+                    body: "The odds for France vs Belgium just changed as France have made some substitutions. Odds for France to win are now 1.91. Would you like to place a bet?",
+                    data: { value: 10 },
+                    actions: [
+                        { action: 'place', title: 'Place Bet' },
+                        { action: 'ignore', title: 'Ignore' }
+                    ]
+                };
+                const notification = new Notification("Odds Change", options);
+
+                notification.onclick = event => {
+                    if (event.action === 'place') {
+                        alert("Bet placed!");
+                    }
+                };
             });
         });
     </script>
