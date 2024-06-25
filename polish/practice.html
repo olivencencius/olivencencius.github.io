@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice - Polish Language Practice</title>
+    <link rel="stylesheet" href="styles/styles.css">
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <button onclick="location.href='main.html'">Home</button>
+            <button onclick="location.href='theory.html'">Theory</button>
+        </nav>
+        
+        <section id="practice-section">
+            <h1>Practice</h1>
+            <div id="options">
+                <h2>Select Number of Questions</h2>
+                <select id="question-number">
+                    <option value="10">10</option>
+                    <option value="20">20</option>
+                    <option value="50">50</option>
+                </select>
+                <h2>Select Grammar Topics</h2>
+                <div id="grammar-options">
+                    <label><input type="checkbox" value="nouns"> Nouns</label>
+                    <label><input type="checkbox" value="pronouns"> Pronouns</label>
+                    <label><input type="checkbox" value="adjectives"> Adjectives</label>
+                    <label><input type="checkbox" value="numbers"> Numbers</label>
+                    <label><input type="checkbox" value="prepositions"> Prepositions</label>
+                    <label><input type="checkbox" value="verbs"> Verbs</label>
+                </div>
+                <h2>Select Cases</h2>
+                <div id="case-options">
+                    <label><input type="checkbox" value="nominative"> Nominative</label>
+                    <label><input type="checkbox" value="accusative"> Accusative</label>
+                    <label><input type="checkbox" value="genitive"> Genitive</label>
+                    <label><input type="checkbox" value="dative"> Dative</label>
+                    <label><input type="checkbox" value="instrumental"> Instrumental</label>
+                    <label><input type="checkbox" value="locative"> Locative</label>
+                    <label><input type="checkbox" value="vocative"> Vocative</label>
+                    <label><input type="checkbox" value="prepositions"> Prepositions</label>
+                    <label><input type="checkbox" value="imperfective"> Imperfective Verbs</label>
+                    <label><input type="checkbox" value="perfective"> Perfective Verbs</label>
+                </div>
+                <button id="start-practice">Start Practice</button>
+            </div>
+            <div id="exercise-container">
+                <form id="exercise-form">
+                    <!-- Questions will be dynamically inserted here -->
+                </form>
+                <button id="submit-answers">Submit Answers</button>
+                <div id="results-container"></div>
+            </div>
+        </section>
+    </div>
+    <script src="scripts/sentences.js"></script>
+    <script src="scripts/script.js"></script>
+</body>
+</html>

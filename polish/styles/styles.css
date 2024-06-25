@@ -1,0 +1,115 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f4f4;
+}
+
+.container {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    max-width: 800px;
+    overflow-y: auto;
+    max-height: 90vh;
+}
+
+/* Navigation Styles */
+nav {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+nav button {
+    margin: 0 10px;
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+nav button:hover {
+    background-color: #0056b3;
+}
+
+/* Section Styles */
+/*section {
+    display: none;
+}
+
+section.active {
+    display: block;
+}*/
+
+/* Theory and Practice Sections */
+#options {
+    margin-bottom: 20px;
+}
+
+/*
+#exercise-container {
+    display: none;
+}*/
+
+.question {
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.feedback {
+    font-size: 0.9em;
+    margin-top: 5px;
+}
+
+.correct {
+    color: green;
+}
+
+.incorrect {
+    color: red;
+}
+
+/* Table Styles */
+table {
+    width: 100%;
+    margin-bottom: 20px;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .container {
+        width: 100%;
+        padding: 10px;
+    }
+
+    nav button {
+        margin: 5px;
+        padding: 8px 12px;
+    }
+
+    th, td {
+        padding: 5px;
+    }
+}
